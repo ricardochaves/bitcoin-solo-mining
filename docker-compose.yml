@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile.miner
+    volumes:
+      - .:/app
+    working_dir: /app
+    depends_on:
+      - bitcoin-core
+
+    command: ["./start.sh"]
+
+  bitcoin-core:
+    build:
+      context: .
+      dockerfile: Dockerfile.btc
+      args:
+        TARGETPLATFORM: "linux/amd64"
+    volumes:
+      - ./btc/:/home/bitcoin/.bitcoin
+    environment:
+      - UID=$UID
+      - GID=$GID
+    command:
+      -printtoconsole

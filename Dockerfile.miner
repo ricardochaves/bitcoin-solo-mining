@@ -1,0 +1,9 @@
+FROM ubuntu:20.04
+
+RUN apt-get update && apt-get install -y wget
+
+WORKDIR /cpuminer
+
+RUN wget https://github.com/pooler/cpuminer/releases/download/v2.5.1/pooler-cpuminer-2.5.1-linux-x86_64.tar.gz
+
+RUN tar -zxvf pooler-cpuminer-2.5.1-linux-x86_64.tar.gz
